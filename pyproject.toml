@@ -1,0 +1,124 @@
+[project]
+name = "mfmodeller"
+version = "0.1.0"
+description = "A collection of algorithms and test-functions for multi-fidelity modelling and Bayesian Optimisation."
+readme = "README.md"
+authors = [{ name = "Mark Pellowe", email = "mjdwork+PHDrepo@gmail.com" }]
+
+
+requires-python = ">=3.12"
+classifiers = [
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+dependencies = []
+
+
+optional-dependencies.dev = [
+    "pytest>=9.0.2",
+    "ruff>=0.15.7",
+    "ty>=0.0.24",
+    "pyrefly>=0.57.1",
+    "pre-commit>=4.5.1",
+    "pytest-cov>=7.1.0",
+]
+
+
+# =============================================================================
+# Ruff - Linting & Formatting
+# =============================================================================
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+    # Core style
+    "E", # pycodestyle errors
+    "W", # pycodestyle warnings
+    "F", # pyflakes
+    "N", # pep8-naming
+    "Q", # flake8-quotes
+
+    # Imports
+    "I",   # isort
+    "ICN", # flake8-import-conventions
+    "INP", # flake8-no-pep420
+    "TC",  # flake8-type-checking
+    "TID", # flake8-tidy-imports
+
+    # Modernization
+    "FA",   # flake8-future-annotations
+    "FLY",  # flynt (f-string conversion)
+    "FURB", # refurb (modern Python)
+    "UP",   # pyupgrade
+    "YTT",  # flake8-2020 (sys.version checks)
+
+    # Bug prevention
+    "ASYNC", # flake8-async
+    "B",     # flake8-bugbear
+    "EXE",   # flake8-executable
+    "S",     # flake8-bandit
+    "T10",   # flake8-debugger
+
+    # Code quality
+    "C4",   # flake8-comprehensions
+    "ISC",  # flake8-implicit-str-concat
+    "PERF", # Perflint (performance)
+    "PIE",  # flake8-pie
+    "RET",  # flake8-return
+    "SIM",  # flake8-simplify
+
+    # Cleanup
+    "ERA", # eradicate (commented-out code)
+    "SLF", # flake8-self (private member access)
+    "T20", # flake8-print
+
+    # Type safety
+    "SLOT", # flake8-slots
+
+    # Testing
+    "PT", # flake8-pytest-style
+
+    # Domain-specific
+    "A",   # flake8-builtins
+    "INT", # flake8-gettext
+    "NPY", # NumPy-specific rules
+]
+ignore = [
+    "S311",   # random for non-crypto purposes (e.g., jitter) is acceptable
+    "SIM108", # ternary operator - often less readable than if-else blocks
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S101"]
+"**/__init__.py" = ["F401"] # re-exports in __init__.py are intentional
+
+# =============================================================================
+# Pytest - Testing
+# =============================================================================
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "tests"]
+addopts = "-v --tb=short"
+asyncio_mode = "auto"
+
+# =============================================================================
+# Coverage - Test Coverage
+# =============================================================================
+
+[tool.coverage.run]
+source = ["src/parking"]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if TYPE_CHECKING:",
+    "raise NotImplementedError",
+]
