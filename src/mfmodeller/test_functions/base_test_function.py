@@ -3,14 +3,17 @@ from abc import ABC, abstractmethod
 from typing import Protocol, overload
 
 import numpy as np
-from numpy.typing import NDArray
 from scipy.optimize import minimize
 from scipy.stats import qmc
 
-from .helpers import x_test_grid_gen, x_test_mesh_flatten, x_test_mesh_gen
+from .helpers import (
+    Bounds,
+    FloatArray,
+    x_test_grid_gen,
+    x_test_mesh_flatten,
+    x_test_mesh_gen,
+)
 
-FloatArray = NDArray[np.float64]
-Bounds = list[tuple[float, float]]
 X_TEST_SAMPLES: int = 1000
 
 logger = logging.getLogger(__name__)
