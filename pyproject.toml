@@ -13,7 +13,13 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
 ]
-dependencies = []
+dependencies = [
+    "marimo>=0.22.3",
+    "numpy>=2.4.4",
+    "pydantic>=2.12.5",
+    "scikit-learn>=1.8.0",
+    "scipy>=1.17.1",
+]
 
 
 optional-dependencies.dev = [
@@ -31,7 +37,7 @@ optional-dependencies.dev = [
 # =============================================================================
 
 [tool.ruff]
-line-length = 100
+line-length = 80
 target-version = "py312"
 src = ["src", "tests"]
 
@@ -122,3 +128,7 @@ exclude_lines = [
     "if TYPE_CHECKING:",
     "raise NotImplementedError",
 ]
+
+[tool.ty.environment]
+python = ".venv/bin/python"
+root = ["./src"]

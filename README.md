@@ -19,4 +19,13 @@ uv add git+ssh://git@github.com//MarkPellowe/MFModeller.git
 uv add git+ssh://git@github.com//MarkPellowe/MFModeller.git@
 ```
 
+## Development
+```bash
+uv sync --extra dev
+uv run pre-commit install
+
+# Run the full commit gate locally
+uv run pre-commit run --all-files
+```
+
 

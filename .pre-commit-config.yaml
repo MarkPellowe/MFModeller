@@ -1,0 +1,44 @@
+minimum_pre_commit_version: 4.0.0
+
+repos:
+  - repo: meta
+    hooks:
+      - id: check-hooks-apply
+      - id: check-useless-excludes
+
+  - repo: local
+    hooks:
+      - id: ruff-format
+        name: ruff format
+        entry: uv run ruff format
+        language: system
+        files: \.pyi?$
+        require_serial: true
+
+      - id: ruff-check
+        name: ruff check
+        entry: uv run ruff check --fix
+        language: system
+        files: \.pyi?$
+        require_serial: true
+
+      - id: pyrefly-check
+        name: pyrefly check
+        entry: uv run pyrefly check
+        language: system
+        files: \.pyi?$
+        require_serial: true
+
+      - id: validate-pyproject
+        name: validate pyproject.toml
+        entry: uv run python -c "import pathlib, tomllib; tomllib.loads(pathlib.Path('pyproject.toml').read_text())"
+        language: system
+        files: ^pyproject\.toml$
+        pass_filenames: false
+
+      - id: validate-uv-lock
+        name: validate uv.lock
+        entry: uv run python -c "import pathlib, tomllib; tomllib.loads(pathlib.Path('uv.lock').read_text())"
+        language: system
+        files: ^uv\.lock$
+        pass_filenames: false
