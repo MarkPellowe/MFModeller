@@ -25,7 +25,7 @@ class FidelityFunction(Protocol):
     def __call__(
         self,
         x: FloatArray,
-        noise_level: float | None = None,
+        noise_level: float = 0.0,
     ) -> FloatArray: ...
 
 
