@@ -64,9 +64,7 @@ class BaseTestFunction(ABC):
         self._n_fidelities = int(
             kwargs.get("n_fidelities", getattr(self, "_n_fidelities", 0))
         )
-        self._ndim = int(
-            kwargs.get("ndim", getattr(self, "_ndim", len(self._bounds)))
-        )
+        self._ndim = int(kwargs.get("ndim", getattr(self, "_ndim", len(self._bounds))))
         self._fidelity_dictionary = dict(
             kwargs.get(
                 "fidelity_dictionary",
@@ -179,8 +177,7 @@ class BaseTestFunction(ABC):
         for index in range(number_of_searches):
             initial_location = rng.random((1, self.ndim))
             initial_location = (
-                lower_bounds
-                + (initial_location * (upper_bounds - lower_bounds))
+                lower_bounds + (initial_location * (upper_bounds - lower_bounds))
             ).reshape(1, self.ndim)
 
             result = minimize(
@@ -476,9 +473,7 @@ class BaseTestFunction(ABC):
         for index in range(x.shape[0]):
             fidelity_value = float(x[index, -1])
             if not fidelity_value.is_integer():
-                raise ValueError(
-                    "The final column must contain integer fidelities."
-                )
+                raise ValueError("The final column must contain integer fidelities.")
 
             row_output = self.evaluate(
                 x[index, :-1],
