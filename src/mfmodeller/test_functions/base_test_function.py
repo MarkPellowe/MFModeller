@@ -92,7 +92,7 @@ class BaseTestFunction(ABC):
     @overload
     def evaluate(
         self,
-        x: np.ndarray | int,
+        x: np.ndarray,
         fidelity: int,
         return_x_with_fidelity: bool = False,
         noise_level: float | None = None,
@@ -101,7 +101,7 @@ class BaseTestFunction(ABC):
     @overload
     def evaluate(
         self,
-        x: np.ndarray | int,
+        x: np.ndarray,
         fidelity: int,
         return_x_with_fidelity: bool = False,
         noise_level: float | None = None,
