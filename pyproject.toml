@@ -37,7 +37,7 @@ optional-dependencies.dev = [
 # =============================================================================
 
 [tool.ruff]
-line-length = 80
+line-length = 88
 target-version = "py312"
 src = ["src", "tests"]
 
